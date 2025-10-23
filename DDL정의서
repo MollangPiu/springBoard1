@@ -1,0 +1,25 @@
+-- 문자셋/엔진은 프로젝트 표준에 맞게 조정하세요.
+CREATE TABLE study_users (
+                       idx           BIGINT AUTO_INCREMENT PRIMARY KEY,
+                       user_id       VARCHAR(50)  NOT NULL UNIQUE,   -- 로그인 아이디
+                       user_pw       VARCHAR(255) NOT NULL,          -- 비밀번호(해시 저장 권장)
+                       nickname      VARCHAR(50)  NOT NULL,
+                       created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                       KEY idx_users_nickname (nickname)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 좋아하는 동물: 강아지/고양이/새/토끼/기타 (ENUM 토큰은 영문으로, 화면 표시는 한글로)
+CREATE TABLE study_board (
+                       id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+                       author_idx      BIGINT      NOT NULL,       -- FK -> users.idx
+                       title           VARCHAR(200) NOT NULL,
+                       content         MEDIUMTEXT   NOT NULL,
+                       favorite_animal ENUM('DOG','CAT','BIRD','RABBIT','ETC') NOT NULL,
+                       created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                       view_count      INT          NOT NULL DEFAULT 0,
+                       CONSTRAINT fk_posts_author
+                           FOREIGN KEY (author_idx) REFERENCES study_users(idx)
+                               ON DELETE CASCADE,
+                       KEY idx_posts_author (author_idx),
+                       KEY idx_posts_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
