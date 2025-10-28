@@ -6,5 +6,10 @@
     <select id="boardRegister" resultType="string">
         SELECT 'tes123t'
     </select>
+    
+    <insert id="register" parameterType="BoardRegisterDTO">
+    	INSERT INTO (USER_IDX, BOARD_TITLE, BOARD_CONTENT, BOARD_FAVORITE_ANIMAL, BOARD_CREATED_AT)
+    	VALUES ( #{userIdx}, #{boardTitle}, #{boardContent}, #{boardFavoriteAnimal}, SYSDATE())
+    </insert>
 
 </mapper>

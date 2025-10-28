@@ -44,7 +44,7 @@ public class MemberController {
 		
 		String result = memberService.register(memberRegisterDTO);
 		if(result.equals("sucess")) {
-			return "login";
+			return "redirect:/member/login";
 		}
 		logger.info("error: {}", result);
 		return "redirect:/member/register";
@@ -56,8 +56,8 @@ public class MemberController {
 		
 		boolean result = memberService.login(request, memberLoginDTO);
 		if(result) {
-			return "redirect:/member/login";
+			return "redirect:/board/register";
 		}
-		return "login";
+		return "redirect:/member/login";
 	}
 }
