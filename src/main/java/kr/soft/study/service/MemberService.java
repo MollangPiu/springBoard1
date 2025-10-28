@@ -57,7 +57,6 @@ public class MemberService {
 		}
 		
 		//µî·Ï
-		logger.info("name: {}", memberRegisterDTO.getUserNickName());
 		memberMapper.register(memberRegisterDTO);
 		
 		return "sucess";
