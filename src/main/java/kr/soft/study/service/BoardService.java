@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
@@ -38,7 +39,7 @@ public class BoardService {
 
 		// session ( 로그인 없을 경우 )
 		if (memberInfo == null) {
-
+			return "null";
 		}
 		logger.info("{}", memberInfo.toString());
 		long userIdx = memberInfo.getUserIdx(); // userIdx 불러오기
@@ -57,17 +58,45 @@ public class BoardService {
 		}
 
 		boardMapper.register(boardRegisterDTO);
+		
+		int boardLastIdx = boardMapper.boardLastIdx(userIdx);
 
-		return "sucess";
+		return "sucess:"+String.valueOf(boardLastIdx);
 
 	}
 	
+	/**
+	 * 게시글 리스트 보기
+	 * @return
+	 */
 	public List<BoardListDTO> list() {
 		List<BoardListDTO> lists = null;
 		
 		lists = boardMapper.list();
 		
 		return lists;
+	}
+	
+	
+	/**
+	 * 상세보기
+	 * @param request
+	 * @return
+	 */
+	public BoardDetailDTO detail(HttpServletRequest request) {
+		
+		String strIdx = request.getParameter("idx");	//idx 가져오기
+		if(strIdx == null) {
+			return null;
+		}
+		
+		int idx = Integer.parseInt(strIdx);
+		
+		boardMapper.viewCount(idx);
+		
+		BoardDetailDTO detail = boardMapper.detail(idx);
+		
+		return detail;
 	}
 
 	/**

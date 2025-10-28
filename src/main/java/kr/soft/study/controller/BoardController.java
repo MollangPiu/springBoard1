@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
@@ -48,8 +49,9 @@ public class BoardController {
 		
 		String result = boardService.register(boardRegisterDTO, request);
 		logger.info("result: {}", result);
-		if(result.equals("sucess")) {
-			return "redirect:/board/list";
+		if(result.startsWith("sucess:")) {
+			int index = result.indexOf(":")+1;
+			return "redirect:/board/detail?idx="+result.substring(index);
 		}
 		return "redirect:/board/register";
 	}
@@ -58,11 +60,24 @@ public class BoardController {
 	public String list(Model model) {
 		
 		List<BoardListDTO> lists = boardService.list();
-		logger.info("size: {}", lists.size());
+		logger.info("List Å©±â: {}", lists.size());
 		
 		model.addAttribute("lists", lists);
 		
 		return "board/boardList";
+	}
+	
+	@GetMapping("/detail")
+	public String detail(Model model, HttpServletRequest request) {
+		
+		BoardDetailDTO detail = boardService.detail(request);
+		if(detail == null) {
+			return "redirect:/board/list";
+		}
+		
+		model.addAttribute("detail", detail);
+		
+		return "board/boardDetail";
 	}
 
 }

@@ -199,11 +199,11 @@
           <%
           	for(int i=0; i < lists.size(); i++) {
           		%>
-          			<tr>
+          			<tr onClick="detail(<%=lists.get(i).getBoardIdx()%>)">
           				<td class="num"><%=lists.get(i).getBoardIdx() %></td>
           				<td>
 			                <div class="title-cell">
-			                  <a class="title-link" href="/board/view?idx=12"><%=lists.get(i).getBoardTitle()%></a>
+			                  <a class="title-link"><%=lists.get(i).getBoardTitle()%></a>
 			                  <!-- <span class="badge">NEW</span> -->
 			                </div>
 		                </td>
@@ -257,5 +257,11 @@
       </nav>
     </section>
   </main>
+  
+<script>
+	function detail(idx) {
+		location.href="${pageContext.request.contextPath}/board/detail?idx="+idx;
+	}
+</script>
 </body>
 </html>
