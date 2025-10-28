@@ -10,32 +10,93 @@ import org.springframework.stereotype.Service;
 
 import kr.soft.study.dto.board.BoardRegisterDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
+import kr.soft.study.dto.member.MemberRegisterDTO;
 import kr.soft.study.mapper.BoardMapper;
 
 @Service
 public class BoardService {
-	
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private BoardMapper boardMapper;
 
-	
-	public void register(BoardRegisterDTO boardRegisterDTO, HttpServletRequest request) {
+	/**
+	 * 회원가입하기
+	 * @param boardRegisterDTO
+	 * @param request
+	 * @return
+	 */
+	public String register(BoardRegisterDTO boardRegisterDTO, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
-		//session 불러오기
+
+		// session 불러오기
 		MemberInfoDTO memberInfo = (MemberInfoDTO) session.getAttribute("userInfo");
 
-		//session ( 로그인 없을 경우 )
-		if(memberInfo == null) {
-			
+		// session ( 로그인 없을 경우 )
+		if (memberInfo == null) {
+
 		}
 		logger.info("{}", memberInfo.toString());
-		long userIdx = memberInfo.getUserIdx(); 	//userIdx 불러오기
-		boardRegisterDTO.setUserIdx(userIdx);		//userIdx 삽입하기
-		
+		long userIdx = memberInfo.getUserIdx(); // userIdx 불러오기
+		boardRegisterDTO.setUserIdx(userIdx); // userIdx 삽입하기
+
+		// 빈값 확인하기
+		String result = checkRegister(boardRegisterDTO);
+		if (!result.equals("sucess")) {
+			return result;
+		}
+
+		// 자리수 확인하기
+		result = checkValidity(boardRegisterDTO);
+		if (!result.equals("sucess")) {
+			return result;
+		}
+
 		boardMapper.register(boardRegisterDTO);
-		
+
+		return "sucess";
+
+	}
+
+	/**
+	 * 유효성 검사, 자리수
+	 * 
+	 * @param boardRegisterDTO
+	 * @return
+	 */
+	private String checkValidity(BoardRegisterDTO boardRegisterDTO) {
+
+		// 1자리 이상, 200자리 이하
+		if (boardRegisterDTO.getBoardTitle().length() < 1 || boardRegisterDTO.getBoardTitle().length() > 200) {
+			return "validity_title";
+		}
+		// 6자리 이상
+		if (boardRegisterDTO.getBoardContent().length() < 6) {
+			return "validity_content";
+		}
+
+		return "sucess";
+	}
+
+	/**
+	 * NULL 혹은 빈값 체크하기
+	 * 
+	 * @param boardRegisterDTO
+	 * @return
+	 */
+	private String checkRegister(BoardRegisterDTO boardRegisterDTO) {
+		if (boardRegisterDTO.getBoardTitle() == null || boardRegisterDTO.getBoardTitle().trim().equals("")) {
+			return "blank_title";
+		}
+		if (boardRegisterDTO.getBoardContent() == null || boardRegisterDTO.getBoardContent().trim().equals("")) {
+			return "blank_content";
+		}
+		if (boardRegisterDTO.getBoardFavoriteAnimal() == null
+				|| boardRegisterDTO.getBoardFavoriteAnimal().trim().equals("")) {
+			return "blank_favoriteAnimal";
+		}
+
+		return "sucess";
 	}
 }

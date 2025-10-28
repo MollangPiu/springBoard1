@@ -32,7 +32,8 @@ public class BoardController {
 	public void registerProcess(BoardRegisterDTO boardRegisterDTO,
 			HttpServletRequest request) {
 		
-		boardService.register(boardRegisterDTO, request);
+		String result = boardService.register(boardRegisterDTO, request);
+		logger.info("result: {}", result);
 	}
 
 }
