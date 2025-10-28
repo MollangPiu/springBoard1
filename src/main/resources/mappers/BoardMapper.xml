@@ -11,6 +11,12 @@
     	INSERT INTO STUDY_BOARD (USER_IDX, BOARD_TITLE, BOARD_CONTENT, BOARD_FAVORITE_ANIMAL, BOARD_CREATED_AT)
     	VALUES ( #{userIdx}, #{boardTitle}, #{boardContent}, #{boardFavoriteAnimal}, SYSDATE())
     </insert>
+    
+    <select id="boardLastIdx" parameterType="Long" resultType="Integer">
+    	SELECT MAX(BOARD_IDX)
+    	FROM STUDY_BOARD
+		WHERE USER_IDX = #{idx}
+    </select>
 
 	<select id="list" resultType="BoardListDTO">
 		SELECT BOARD_IDX,

@@ -18,6 +18,13 @@ public interface BoardMapper {
 	void register(BoardRegisterDTO boardRegisterDTO);
 	
 	/**
+	 * 마지막 IDX 확인하기
+	 * @param idx
+	 * @return
+	 */
+	int boardLastIdx(long idx);
+	
+	/**
 	 * 게시판 리스트
 	 * @return
 	 */

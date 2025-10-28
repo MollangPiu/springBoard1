@@ -49,8 +49,9 @@ public class BoardController {
 		
 		String result = boardService.register(boardRegisterDTO, request);
 		logger.info("result: {}", result);
-		if(result.equals("sucess")) {
-			return "redirect:/board/list";
+		if(result.startsWith("sucess:")) {
+			int index = result.indexOf(":")+1;
+			return "redirect:/board/detail?idx="+result.substring(index);
 		}
 		return "redirect:/board/register";
 	}
@@ -59,7 +60,7 @@ public class BoardController {
 	public String list(Model model) {
 		
 		List<BoardListDTO> lists = boardService.list();
-		logger.info("size: {}", lists.size());
+		logger.info("List Å©±â: {}", lists.size());
 		
 		model.addAttribute("lists", lists);
 		

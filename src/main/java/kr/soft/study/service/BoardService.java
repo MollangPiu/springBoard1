@@ -39,7 +39,7 @@ public class BoardService {
 
 		// session ( 로그인 없을 경우 )
 		if (memberInfo == null) {
-
+			return "null";
 		}
 		logger.info("{}", memberInfo.toString());
 		long userIdx = memberInfo.getUserIdx(); // userIdx 불러오기
@@ -58,8 +58,10 @@ public class BoardService {
 		}
 
 		boardMapper.register(boardRegisterDTO);
+		
+		int boardLastIdx = boardMapper.boardLastIdx(userIdx);
 
-		return "sucess";
+		return "sucess:"+String.valueOf(boardLastIdx);
 
 	}
 	
