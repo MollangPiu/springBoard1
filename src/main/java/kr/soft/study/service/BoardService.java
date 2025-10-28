@@ -1,5 +1,7 @@
 package kr.soft.study.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
 import kr.soft.study.dto.member.MemberRegisterDTO;
@@ -57,6 +60,14 @@ public class BoardService {
 
 		return "sucess";
 
+	}
+	
+	public List<BoardListDTO> list() {
+		List<BoardListDTO> lists = null;
+		
+		lists = boardMapper.list();
+		
+		return lists;
 	}
 
 	/**

@@ -12,4 +12,22 @@
     	VALUES ( #{userIdx}, #{boardTitle}, #{boardContent}, #{boardFavoriteAnimal}, SYSDATE())
     </insert>
 
+	<select id="list" resultType="BoardListDTO">
+		SELECT BOARD_IDX,
+		       BOARD_TITLE,
+		       DATE_FORMAT(BOARD_CREATED_AT, '%Y-%m-%d') AS BOARD_CREATED_AT, -- yyyy-MM-dd
+		       BOARD_FAVORITE_ANIMAL,
+		       BOARD_VIEW_COUNT,
+		       (SELECT USER_NICKNAME FROM STUDY_USERS WHERE USER_IDX = BOARD.USER_IDX) AS BOARD_NICKNAME,
+		        CASE UPPER(board_favorite_animal)
+		            WHEN 'DOG'    THEN '강아지'
+		            WHEN 'CAT'    THEN '고양이'
+		            WHEN 'BIRD'   THEN '새'
+		            WHEN 'RABBIT' THEN '토끼'
+		            WHEN 'ETC'    THEN '기타'
+		            ELSE '알수없음'
+		        END AS ANIMAL_KOR
+		FROM STUDY_BOARD BOARD
+		ORDER BY BOARD_IDX DESC
+	</select>
 </mapper>
