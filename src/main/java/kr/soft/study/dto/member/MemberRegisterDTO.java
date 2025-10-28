@@ -4,7 +4,7 @@ public class MemberRegisterDTO {
 
 	private String userId;
 	private String userPw;
-	private String nickName;
+	private String userNickName;
 	public String getUserId() {
 		return userId;
 	}
@@ -17,11 +17,11 @@ public class MemberRegisterDTO {
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getUserNickName() {
+		return userNickName;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
 	}
 	
 	
