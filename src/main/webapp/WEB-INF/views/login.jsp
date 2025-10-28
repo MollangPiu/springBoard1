@@ -60,14 +60,14 @@
         <h1 id="title" class="title">로그인</h1>
       </header>
 
-      <form class="form" method="post" action="/auth/login">
+      <form class="form" method="post" action="${pageContext.request.contextPath}/member/loginProcess">
         <div class="group">
           <label class="label" for="user_id">아이디</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z"/>
             </svg>
-            <input type="text" id="user_id" name="user_id" required minlength="4" maxlength="50" placeholder="아이디 입력" />
+            <input type="text" id="user_id" name="userId" required minlength="4" maxlength="50" placeholder="아이디 입력" />
           </div>
           <small class="muted">예: student01</small>
         </div>
@@ -78,7 +78,7 @@
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM9 6a3 3 0 1 1 6 0v2H9Zm8 12H7v-8h10Z"/>
             </svg>
-            <input type="password" id="user_pw" name="user_pw" required minlength="4" maxlength="255" placeholder="비밀번호 입력" />
+            <input type="password" id="user_pw" name="userPw" required minlength="4" maxlength="255" placeholder="비밀번호 입력" />
           </div>
         </div>
 

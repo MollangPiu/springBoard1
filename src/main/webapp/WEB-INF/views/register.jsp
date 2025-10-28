@@ -104,7 +104,7 @@
         </div>
 
         <button class="btn btn-primary" type="submit">가입하기</button>
-        <p class="muted">이미 계정이 있나요? <a href="./login.html">로그인</a></p>
+        <p class="muted">이미 계정이 있나요? <a href="${pageContext.request.contextPath}/member/login">로그인</a></p>
 
         <!-- 서버 메시지 자리
         <p style="color:#ef4444;font-size:12px;margin:0">이미 사용 중인 아이디입니다.</p>

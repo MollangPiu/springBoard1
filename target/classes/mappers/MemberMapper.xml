@@ -7,8 +7,29 @@
         SELECT 'tes123t'
     </select>
     
+    <select id="checkId" parameterType="String" resultType="Integer">
+    	SELECT COUNT(*) FROM STUDY_USERS WHERE USER_ID = #{param}
+    </select>
+    
+    <select id="checkNickName" parameterType="String" resultType="Integer">
+    	SELECT COUNT(*) FROM STUDY_USERS WHERE NICKNAME = #{param}
+    </select>
+    
     <insert id="register" parameterType="MemberRegisterDTO">
     	INSERT INTO STUDY_USERS (USER_ID, USER_PW, NICKNAME, CREATED_AT)
     	VALUES ( #{userId}, #{userPw}, #{nickName}, SYSDATE())
     </insert>
+    
+    <select id="login" parameterType="String" resultType="String">
+    	SELECT USER_PW FROM STUDY_USERS WHERE USER_ID = #{param}
+    </select>
+    
+    <select id="userInfo" parameterType="String" resultType="MemberInfoDTO">
+    	SELECT
+    		IDX,
+    		USER_ID,
+    		NICKNAME
+    		FROM STUDY_USERS
+    		WHERE USER_ID = #{param}
+    </select>
 </mapper>
