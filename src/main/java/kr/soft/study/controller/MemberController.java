@@ -56,7 +56,7 @@ public class MemberController {
 		
 		boolean result = memberService.login(request, memberLoginDTO);
 		if(result) {
-			return "redirect:/board/register";
+			return "redirect:/board/list";
 		}
 		return "redirect:/member/login";
 	}
