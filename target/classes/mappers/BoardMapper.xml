@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.soft.study.mapper.BoardMapper">
+
+
+    <select id="boardRegister" resultType="string">
+        SELECT 'tes123t'
+    </select>
+    
+    <insert id="register" parameterType="BoardRegisterDTO">
+    	INSERT INTO STUDY_BOARD (USER_IDX, BOARD_TITLE, BOARD_CONTENT, BOARD_FAVORITE_ANIMAL, BOARD_CREATED_AT)
+    	VALUES ( #{userIdx}, #{boardTitle}, #{boardContent}, #{boardFavoriteAnimal}, SYSDATE())
+    </insert>
+
+</mapper>
