@@ -51,7 +51,7 @@ public class MemberService {
 		if(checkId > 0) {
 			return "not unique id";
 		}
-		int checkNickName = memberMapper.checkNickName(memberRegisterDTO.getNickName());
+		int checkNickName = memberMapper.checkNickName(memberRegisterDTO.getUserNickName());
 		if(checkNickName >0 ) {
 			return "not unique nickName";
 		}
@@ -105,7 +105,7 @@ public class MemberService {
 			return "validity_pw";
 		}
 		//3자리 이상, 18자리 이하
-		if(memberRegisterDTO.getNickName().length() < 4 || memberRegisterDTO.getNickName().length() > 18) {
+		if(memberRegisterDTO.getUserNickName().length() < 4 || memberRegisterDTO.getUserNickName().length() > 18) {
 			return "validity_nickname";
 		}
 		
@@ -127,7 +127,7 @@ public class MemberService {
 		if(memberRegisterDTO.getUserPw() != null && memberRegisterDTO.getUserPw().trim().equals("")) {
 			return "blank_pw";
 		}
-		if(memberRegisterDTO.getNickName() != null && memberRegisterDTO.getNickName().trim().equals("")) {
+		if(memberRegisterDTO.getUserNickName() != null && memberRegisterDTO.getUserNickName().trim().equals("")) {
 			return "blank_nickname";
 		}
 		
