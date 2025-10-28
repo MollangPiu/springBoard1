@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<meta charset="EUC-KR">
 <head>
   <meta charset="UTF-8" />
-  <title>�α���</title>
+  <title>로그인</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
@@ -57,48 +56,48 @@
     <section class="card" role="region" aria-labelledby="title">
       <header class="head">
         <span class="logo" aria-hidden="true"></span>
-        <h1 id="title" class="title">�α���</h1>
+        <h1 id="title" class="title">로그인</h1>
       </header>
 
       <form class="form" method="post" action="${pageContext.request.contextPath}/member/loginProcess">
         <div class="group">
-          <label class="label" for="user_id">���̵�</label>
+          <label class="label" for="user_id">아이디</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z"/>
             </svg>
-            <input type="text" id="user_id" name="userId" required minlength="4" maxlength="50" placeholder="���̵� �Է�" />
+            <input type="text" id="user_id" name="userId" required minlength="4" maxlength="50" placeholder="아이디 입력" />
           </div>
-          <small class="muted">��: student01</small>
+          <small class="muted">예: student01</small>
         </div>
 
         <div class="group">
-          <label class="label" for="user_pw">��й�ȣ</label>
+          <label class="label" for="user_pw">비밀번호</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM9 6a3 3 0 1 1 6 0v2H9Zm8 12H7v-8h10Z"/>
             </svg>
-            <input type="password" id="user_pw" name="userPw" required minlength="4" maxlength="255" placeholder="��й�ȣ �Է�" />
+            <input type="password" id="user_pw" name="userPw" required minlength="4" maxlength="255" placeholder="비밀번호 입력" />
           </div>
         </div>
 
         <div class="row">
           <label style="display:inline-flex;align-items:center;gap:8px;color:var(--muted)">
-            <input type="checkbox" name="remember" value="Y" /> �α��� ���� ����
+            <input type="checkbox" name="remember" value="Y" /> 로그인 상태 유지
           </label>
-          <a href="/auth/forgot">��й�ȣ ã��</a>
+          <a href="/auth/forgot">비밀번호 찾기</a>
         </div>
 
-        <button class="btn btn-primary" type="submit">�α���</button>
-        <p class="muted">ó���̽Ű���? <a href="${pageContext.request.contextPath}/member/register">ȸ������</a></p>
+        <button class="btn btn-primary" type="submit">로그인</button>
+        <p class="muted">처음이신가요? <a href="${pageContext.request.contextPath}/member/register">회원가입</a></p>
 
-        <!-- ���� �޽��� �ڸ�
-        <p style="color:#ef4444;font-size:12px;margin:0">���̵� �Ǵ� ��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
+        <!-- 서버 메시지 자리
+        <p style="color:#ef4444;font-size:12px;margin:0">아이디 또는 비밀번호가 올바르지 않습니다.</p>
         -->
       </form>
 
       <div class="form" style="padding-top:0">
-        <span class="badge">���� ��: <code>POST /auth/login</code> ��������Ʈ</span>
+        <span class="badge">강의 팁: <code>POST /auth/login</code> 엔드포인트</span>
       </div>
     </section>
   </main>

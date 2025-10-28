@@ -57,6 +57,7 @@ public class MemberService {
 		}
 		
 		//µî·Ï
+		logger.info("name: {}", memberRegisterDTO.getUserNickName());
 		memberMapper.register(memberRegisterDTO);
 		
 		return "sucess";
@@ -78,8 +79,10 @@ public class MemberService {
 		if(!dbPassword.equals(memberLoginDTO.getUserPw())) {
 			return false;
 		}
-		
+		logger.info("check: {}", memberLoginDTO.getUserId());
 		MemberInfoDTO info = memberMapper.userInfo(memberLoginDTO.getUserId());
+		
+		logger.info("result: {}", info.toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("userInfo", info);
 		

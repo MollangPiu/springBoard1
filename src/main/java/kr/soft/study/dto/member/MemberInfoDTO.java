@@ -24,5 +24,8 @@ public class MemberInfoDTO {
 		this.userNinkName = userNinkName;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "MemberInfoDTO [userId=" + userId + ", userIdx=" + userIdx + ", userNinkName=" + userNinkName + "]";
+	}
 }
