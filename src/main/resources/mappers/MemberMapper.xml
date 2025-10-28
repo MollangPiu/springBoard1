@@ -29,7 +29,7 @@
     		USER_IDX,
     		USER_ID,
     		USER_NICKNAME
-    		FROM STUDY_USERS
-    		WHERE USER_ID = #{param}
+   		FROM STUDY_USERS
+   		WHERE USER_ID = #{param}
     </select>
 </mapper>

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<meta charset="UTF-8">
 <head>
   <meta charset="UTF-8" />
   <title>로그인</title>

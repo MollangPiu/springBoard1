@@ -78,8 +78,10 @@ public class MemberService {
 		if(!dbPassword.equals(memberLoginDTO.getUserPw())) {
 			return false;
 		}
-		
+		logger.info("check: {}", memberLoginDTO.getUserId());
 		MemberInfoDTO info = memberMapper.userInfo(memberLoginDTO.getUserId());
+		
+		logger.info("result: {}", info.toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("userInfo", info);
 		
