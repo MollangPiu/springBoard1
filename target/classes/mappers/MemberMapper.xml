@@ -12,12 +12,12 @@
     </select>
     
     <select id="checkNickName" parameterType="String" resultType="Integer">
-    	SELECT COUNT(*) FROM STUDY_USERS WHERE NICKNAME = #{param}
+    	SELECT COUNT(*) FROM STUDY_USERS WHERE USER_NICKNAME = #{param}
     </select>
     
     <insert id="register" parameterType="MemberRegisterDTO">
-    	INSERT INTO STUDY_USERS (USER_ID, USER_PW, NICKNAME, CREATED_AT)
-    	VALUES ( #{userId}, #{userPw}, #{nickName}, SYSDATE())
+    	INSERT INTO STUDY_USERS (USER_ID, USER_PW, USER_NICKNAME, USER_CREATED_AT)
+    	VALUES ( #{userId}, #{userPw}, #{userNickName}, SYSDATE())
     </insert>
     
     <select id="login" parameterType="String" resultType="String">
@@ -26,9 +26,9 @@
     
     <select id="userInfo" parameterType="String" resultType="MemberInfoDTO">
     	SELECT
-    		IDX,
+    		USER_IDX,
     		USER_ID,
-    		NICKNAME
+    		USER_NICKNAME
     		FROM STUDY_USERS
     		WHERE USER_ID = #{param}
     </select>

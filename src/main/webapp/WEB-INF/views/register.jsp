@@ -99,7 +99,7 @@
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M12 12.75a5.75 5.75 0 1 0-5.75-5.75A5.75 5.75 0 0 0 12 12.75Zm0 2.5c-4.97 0-9 2.49-9 5.56V23h18v-2.19c0-3.07-4.03-5.56-9-5.56Z"/>
             </svg>
-            <input type="text" id="nickname" name="nickName" required maxlength="50" placeholder="표시될 이름" />
+            <input type="text" id="nickname" name="userNickName" required maxlength="50" placeholder="표시될 이름" />
           </div>
         </div>
 
@@ -112,7 +112,7 @@
       </form>
 
       <div class="form" style="padding-top:0">
-        <span class="badge">강의 팁: <code>POST /auth/register</code> 엔드포인트</span>
+        <span class="badge">강의 팁: <code>POST /member/register</code> 엔드포인트</span>
       </div>
     </section>
   </main>
