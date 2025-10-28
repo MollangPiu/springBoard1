@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<meta charset="EUC-KR">
 <head>
   <meta charset="UTF-8" />
-  <title>È¸¿ø°¡ÀÔ</title>
+  <title>íšŒì›ê°€ìž…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
@@ -56,63 +55,63 @@
     <section class="card" role="region" aria-labelledby="title">
       <header class="head">
         <span class="logo" aria-hidden="true"></span>
-        <h1 id="title" class="title">È¸¿ø°¡ÀÔ</h1>
+        <h1 id="title" class="title">íšŒì›ê°€ìž…</h1>
       </header>
 
       <form class="form" method="post" action="${pageContext.request.contextPath}/member/registerProcess" novalidate>
-        <!-- idx(pk)´Â DB ÀÚµ¿ »ý¼º ¡æ Æû¿¡ Æ÷ÇÔ X -->
+        <!-- idx(pk)ëŠ” DB ìžë™ ìƒì„± â†’ í¼ì— í¬í•¨ X -->
 
         <div class="group">
-          <label class="label" for="reg_user_id">¾ÆÀÌµð</label>
+          <label class="label" for="reg_user_id">ì•„ì´ë””</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z"/>
             </svg>
-            <input type="text" id="reg_user_id" name="userId" required minlength="4" maxlength="50" placeholder="¿µ¹®/¼ýÀÚ 4ÀÚ ÀÌ»ó" />
+            <input type="text" id="reg_user_id" name="userId" required minlength="4" maxlength="50" placeholder="ì˜ë¬¸/ìˆ«ìž 4ìž ì´ìƒ" />
           </div>
-          <small class="muted">Áßº¹ °Ë»ç´Â ¼­¹ö¿¡¼­ Ã³¸®ÇÏ¼¼¿ä.</small>
+          <small class="muted">ì¤‘ë³µ ê²€ì‚¬ëŠ” ì„œë²„ì—ì„œ ì²˜ë¦¬í•˜ì„¸ìš”.</small>
         </div>
 
         <div class="group">
-          <label class="label" for="reg_user_pw">ºñ¹Ð¹øÈ£</label>
+          <label class="label" for="reg_user_pw">ë¹„ë°€ë²ˆí˜¸</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM9 6a3 3 0 1 1 6 0v2H9Zm8 12H7v-8h10Z"/>
             </svg>
-            <input type="password" id="reg_user_pw" name="userPw" required minlength="6" maxlength="255" placeholder="¿µ¹®/¼ýÀÚ/±âÈ£ 6ÀÚ ÀÌ»ó" />
+            <input type="password" id="reg_user_pw" name="userPw" required minlength="6" maxlength="255" placeholder="ì˜ë¬¸/ìˆ«ìž/ê¸°í˜¸ 6ìž ì´ìƒ" />
           </div>
         </div>
 
         <div class="group">
-          <label class="label" for="reg_user_pw2">ºñ¹Ð¹øÈ£ È®ÀÎ</label>
+          <label class="label" for="reg_user_pw2">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2ZM9 6a3 3 0 1 1 6 0v2H9Zm8 12H7v-8h10Z"/>
             </svg>
-            <input type="password" id="reg_user_pw2" name="userPw2" required minlength="6" maxlength="255" placeholder="ºñ¹Ð¹øÈ£ ÀçÀÔ·Â" />
+            <input type="password" id="reg_user_pw2" name="userPw2" required minlength="6" maxlength="255" placeholder="ë¹„ë°€ë²ˆí˜¸ ìž¬ìž…ë ¥" />
           </div>
         </div>
 
         <div class="group">
-          <label class="label" for="nickname">´Ð³×ÀÓ</label>
+          <label class="label" for="nickname">ë‹‰ë„¤ìž„</label>
           <div class="input">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" d="M12 12.75a5.75 5.75 0 1 0-5.75-5.75A5.75 5.75 0 0 0 12 12.75Zm0 2.5c-4.97 0-9 2.49-9 5.56V23h18v-2.19c0-3.07-4.03-5.56-9-5.56Z"/>
             </svg>
-            <input type="text" id="nickname" name="nickName" required maxlength="50" placeholder="Ç¥½ÃµÉ ÀÌ¸§" />
+            <input type="text" id="nickname" name="userNickName" required maxlength="50" placeholder="í‘œì‹œë  ì´ë¦„" />
           </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">°¡ÀÔÇÏ±â</button>
-        <p class="muted">ÀÌ¹Ì °èÁ¤ÀÌ ÀÖ³ª¿ä? <a href="./login.html">·Î±×ÀÎ</a></p>
+        <button class="btn btn-primary" type="submit">ê°€ìž…í•˜ê¸°</button>
+        <p class="muted">ì´ë¯¸ ê³„ì •ì´ ìžˆë‚˜ìš”? <a href="${pageContext.request.contextPath}/member/login">ë¡œê·¸ì¸</a></p>
 
-        <!-- ¼­¹ö ¸Þ½ÃÁö ÀÚ¸®
-        <p style="color:#ef4444;font-size:12px;margin:0">ÀÌ¹Ì »ç¿ë ÁßÀÎ ¾ÆÀÌµðÀÔ´Ï´Ù.</p>
+        <!-- ì„œë²„ ë©”ì‹œì§€ ìžë¦¬
+        <p style="color:#ef4444;font-size:12px;margin:0">ì´ë¯¸ ì‚¬ìš© ì¤‘ì¸ ì•„ì´ë””ìž…ë‹ˆë‹¤.</p>
         -->
       </form>
 
       <div class="form" style="padding-top:0">
-        <span class="badge">°­ÀÇ ÆÁ: <code>POST /auth/register</code> ¿£µåÆ÷ÀÎÆ®</span>
+        <span class="badge">ê°•ì˜ íŒ: <code>POST /member/register</code> ì—”ë“œí¬ì¸íŠ¸</span>
       </div>
     </section>
   </main>

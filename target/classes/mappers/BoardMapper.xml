@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.soft.study.mapper.BoardMapper">
+
+
+    <select id="boardRegister" resultType="string">
+        SELECT 'tes123t'
+    </select>
+    
+    <insert id="register" parameterType="BoardRegisterDTO">
+    	INSERT INTO STUDY_BOARD (USER_IDX, BOARD_TITLE, BOARD_CONTENT, BOARD_FAVORITE_ANIMAL, BOARD_CREATED_AT)
+    	VALUES ( #{userIdx}, #{boardTitle}, #{boardContent}, #{boardFavoriteAnimal}, SYSDATE())
+    </insert>
+    
+    <select id="boardLastIdx" parameterType="Long" resultType="Integer">
+    	SELECT MAX(BOARD_IDX)
+    	FROM STUDY_BOARD
+		WHERE USER_IDX = #{idx}
+    </select>
+
+	<select id="list" resultType="BoardListDTO">
+		SELECT BOARD_IDX,
+		       BOARD_TITLE,
+		       DATE_FORMAT(BOARD_CREATED_AT, '%Y-%m-%d') AS BOARD_CREATED_AT, -- yyyy-MM-dd
+		       BOARD_FAVORITE_ANIMAL,
+		       BOARD_VIEW_COUNT,
+		       (SELECT USER_NICKNAME FROM STUDY_USERS WHERE USER_IDX = BOARD.USER_IDX) AS BOARD_NICKNAME,
+		        CASE UPPER(board_favorite_animal)
+		            WHEN 'DOG'    THEN '강아지'
+		            WHEN 'CAT'    THEN '고양이'
+		            WHEN 'BIRD'   THEN '새'
+		            WHEN 'RABBIT' THEN '토끼'
+		            WHEN 'ETC'    THEN '기타'
+		            ELSE '알수없음'
+		        END AS ANIMAL_KOR
+		FROM STUDY_BOARD BOARD
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<update id="viewCount" parameterType="Integer">
+		UPDATE STUDY_BOARD
+		SET BOARD_VIEW_COUNT = BOARD_VIEW_COUNT+1
+		WHERE BOARD_IDX = #{idx}
+	</update>
+	
+	<select id="detail" parameterType="Integer" resultType="BoardDetailDTO">
+		SELECT BOARD_IDX,
+		       BOARD_TITLE,
+		       BOARD_CONTENT,
+		       DATE_FORMAT(BOARD_CREATED_AT, '%Y-%m-%d') AS BOARD_CREATED_AT, -- yyyy-MM-dd
+		       BOARD_FAVORITE_ANIMAL,
+		       BOARD_VIEW_COUNT,
+		       (SELECT USER_NICKNAME FROM STUDY_USERS WHERE USER_IDX = BOARD.USER_IDX) AS BOARD_NICKNAME,
+		        CASE UPPER(board_favorite_animal)
+		            WHEN 'DOG'    THEN '강아지'
+		            WHEN 'CAT'    THEN '고양이'
+		            WHEN 'BIRD'   THEN '새'
+		            WHEN 'RABBIT' THEN '토끼'
+		            WHEN 'ETC'    THEN '기타'
+		            ELSE '알수없음'
+		        END AS ANIMAL_KOR
+		FROM STUDY_BOARD BOARD
+		WHERE BOARD_IDX = #{idx}
+	</select>
+</mapper>
