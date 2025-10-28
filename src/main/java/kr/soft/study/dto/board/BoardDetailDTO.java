@@ -1,9 +1,10 @@
 package kr.soft.study.dto.board;
 
-public class BoardListDTO {
+public class BoardDetailDTO {
 
 	private long boardIdx;
 	private String boardTitle;
+	private String boardContent;
 	private String boardCreatedAt;
 	private String boardFavoriteAnimal;
 	private int boardViewCount;
@@ -22,6 +23,12 @@ public class BoardListDTO {
 	}
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
+	}
+	public String getBoardContent() {
+		return boardContent;
+	}
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
 	public String getBoardCreatedAt() {
 		return boardCreatedAt;
@@ -53,6 +60,4 @@ public class BoardListDTO {
 	public void setAnimalKor(String animalKor) {
 		this.animalKor = animalKor;
 	}
-	
-	
 }
