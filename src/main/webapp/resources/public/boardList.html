@@ -141,7 +141,7 @@
         <form class="filters" method="get" action="/board/list">
           <div class="select">
             <label class="sr-only" for="animal">동물 필터</label>
-            <select id="animal" name="animal">
+            <select id="animal" name="searchAnimal">
               <option value="">전체 동물</option>
               <option value="DOG">강아지</option>
               <option value="CAT">고양이</option>
@@ -151,18 +151,9 @@
             </select>
           </div>
 
-          <div class="select">
-            <label class="sr-only" for="sort">정렬</label>
-            <select id="sort" name="sort">
-              <option value="recent">최신순</option>
-              <option value="popular">조회수순</option>
-              <option value="title">제목순</option>
-            </select>
-          </div>
-
           <div class="input">
             <label class="sr-only" for="q">검색어</label>
-            <input id="q" name="q" type="text" placeholder="제목/내용/작성자 검색" />
+            <input id="q" name="q" type="text" placeholder="제목/내용/작성자 검색" name="searchKeyword"/>
           </div>
 
           <button class="btn btn-primary" type="submit">검색</button>

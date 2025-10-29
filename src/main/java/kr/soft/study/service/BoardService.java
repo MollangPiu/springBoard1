@@ -9,12 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import kr.soft.study.dto.board.BoardDTO;
 import kr.soft.study.dto.board.BoardDeleteProcessDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardSearchDTO;
 import kr.soft.study.dto.board.BoardUpdateDetailDTO;
 import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
@@ -75,12 +78,60 @@ public class BoardService {
 	 * 
 	 * @return
 	 */
-	public List<BoardListDTO> list() {
+	public int list(BoardSearchDTO boardSearchDTO,
+			HttpServletRequest request,
+			Model model) {
+		
+		
 		List<BoardListDTO> lists = null;
+		logger.info("search: {}", boardSearchDTO.toString());
+		
+		//Page번호 지정
+		String pageNum = request.getParameter("pageNum");
+		int num = 0;
+		if(pageNum != null ) {
+			num = Integer.parseInt(pageNum)*10;
+		}
+		boardSearchDTO.setPageNum(num);
+		model.addAttribute("pageNum", num);
 
-		lists = boardMapper.list();
-
-		return lists;
+		if(boardSearchDTO.getSearchAnimal() == null) {
+			lists = boardMapper.list(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSize(boardSearchDTO);
+		}
+		
+		
+		if(!boardSearchDTO.getSearchAnimal().trim().equals("") &&
+				!boardSearchDTO.getSearchKeyword().trim().equals("")) {
+			logger.info("search all");
+			lists = boardMapper.listSearchAll(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchAllSize(boardSearchDTO);
+		}
+		
+		//동물 검색
+		if(!boardSearchDTO.getSearchAnimal().trim().equals("")) {
+			logger.info("search animal");
+			lists = boardMapper.listSearchAnimal(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchAnimalSize(boardSearchDTO);
+		}
+		
+		//제목 키워드 검색
+		if(!boardSearchDTO.getSearchKeyword().trim().equals("")) {
+			logger.info("search keyword");
+			lists = boardMapper.listSearchKeyword(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchKeywordSize(boardSearchDTO);
+		}
+		
+		lists= boardMapper.list(boardSearchDTO);
+		model.addAttribute("lists", lists);
+		
+		
+		return boardMapper.listSize(boardSearchDTO);
+		
 	}
 
 	/**
