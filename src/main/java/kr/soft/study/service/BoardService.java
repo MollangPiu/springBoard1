@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.soft.study.dto.board.BoardDTO;
+import kr.soft.study.dto.board.BoardDeleteProcessDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
@@ -126,6 +127,12 @@ public class BoardService {
 		return detail;
 	}
 
+	/**
+	 * 수정하기 완료버튼
+	 * @param boardUpdateProcessDTO
+	 * @param request
+	 * @return
+	 */
 	public String updateProcess(BoardUpdateProcessDTO boardUpdateProcessDTO, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberInfoDTO info = (MemberInfoDTO) session.getAttribute("userInfo");
@@ -155,6 +162,37 @@ public class BoardService {
 		
 		return "sucess:" + String.valueOf(boardUpdateProcessDTO.getBoardIdx());
 	}
+	
+	/**
+	 * 삭제하기
+	 * @param request
+	 * @return
+	 */
+	public String deleteProcess(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberInfoDTO info = (MemberInfoDTO) session.getAttribute("userInfo");
+
+		//작성자 유효성 검사
+		if (info == null) {
+			return "null";
+		}
+		
+		long userIdx = info.getUserIdx();
+		
+		String strBoardIdx = request.getParameter("idx");
+		long boardIdx = Long.parseLong(strBoardIdx);
+		
+		BoardDeleteProcessDTO boardDeleteProcessDTO = new BoardDeleteProcessDTO();
+		boardDeleteProcessDTO.setUserIdx(userIdx);
+		boardDeleteProcessDTO.setBoardIdx(boardIdx);
+		
+		boardMapper.deleteProcess(boardDeleteProcessDTO);
+		
+		return "sucess";
+	}
+	
+	
+	
 
 	/**
 	 * 유효성 검사, 자리수
