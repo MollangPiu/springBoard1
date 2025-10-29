@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.soft.study.dto.board.BoardDeleteProcessDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
@@ -58,4 +59,10 @@ public interface BoardMapper {
 	 * @param boardUpdateProcessDTO
 	 */
 	void updateProcess(BoardUpdateProcessDTO boardUpdateProcessDTO);
+	
+	/**
+	 * 삭제하기, 완료버튼
+	 * @param boardDeleteProcessDTO
+	 */
+	void deleteProcess(BoardDeleteProcessDTO boardDeleteProcessDTO);
 }

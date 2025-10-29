@@ -108,5 +108,14 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	@GetMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		
+		String result = boardService.deleteProcess(request);
+		logger.info("result: {}", result);
+		
+		return "redirect:/board/list";
+	}
 
 }

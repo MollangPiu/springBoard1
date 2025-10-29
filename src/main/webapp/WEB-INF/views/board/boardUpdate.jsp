@@ -124,7 +124,7 @@
         <div class="actions">
           <a class="btn btn-ghost" href="${pageContext.request.contextPath}/board/detail?idx=${detail.boardIdx}">취소</a>
           <div>
-            <a class="btn btn-danger" href="/board/delete?idx=12">삭제</a>
+            <a class="btn btn-danger" href="${pageContext.request.contextPath}/board/delete?idx=${detail.getBoardIdx()}">삭제</a>
             <button class="btn btn-primary" type="submit">저장</button>
           </div>
         </div>
