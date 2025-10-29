@@ -79,5 +79,10 @@ public class BoardController {
 		
 		return "board/boardDetail";
 	}
+	
+	@GetMapping("/update")
+	public String update() {
+		return "board/boardUpdate";
+	}
 
 }
