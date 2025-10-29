@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardSearchDTO;
 import kr.soft.study.dto.board.BoardUpdateDetailDTO;
 import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
@@ -59,9 +60,9 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Model model, BoardSearchDTO boardSearchDTO) {
 		
-		List<BoardListDTO> lists = boardService.list();
+		List<BoardListDTO> lists = boardService.list(boardSearchDTO);
 		logger.info("List Å©±â: {}", lists.size());
 		
 		model.addAttribute("lists", lists);

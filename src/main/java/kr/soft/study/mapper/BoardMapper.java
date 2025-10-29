@@ -8,6 +8,7 @@ import kr.soft.study.dto.board.BoardDeleteProcessDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardSearchDTO;
 import kr.soft.study.dto.board.BoardUpdateDetailDTO;
 import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 
@@ -27,11 +28,34 @@ public interface BoardMapper {
 	 */
 	int boardLastIdx(long idx);
 	
+	
 	/**
 	 * 게시판 리스트
 	 * @return
 	 */
 	List<BoardListDTO> list();
+	
+	/**
+	 * 게시판 검색, 키워드, 동물 검색
+	 * @param boardSearchDTO
+	 * @return
+	 */
+	List<BoardListDTO> listSearchAll(BoardSearchDTO boardSearchDTO);
+	
+	/**
+	 * 게시판 리스트 동물 검색
+	 * @param boardSearchDTO
+	 * @return
+	 */
+	List<BoardListDTO> listSearchAnimal(BoardSearchDTO boardSearchDTO);
+	
+	
+	/**
+	 * 게시판 리스트 키워드 검색
+	 * @param boardSearchDTO
+	 * @return
+	 */
+	List<BoardListDTO> listSearchKeyword(BoardSearchDTO boardSearchDTO);
 	
 	/**
 	 * 조회수 늘리기

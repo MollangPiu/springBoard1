@@ -15,6 +15,7 @@ import kr.soft.study.dto.board.BoardDeleteProcessDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardSearchDTO;
 import kr.soft.study.dto.board.BoardUpdateDetailDTO;
 import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
@@ -75,12 +76,39 @@ public class BoardService {
 	 * 
 	 * @return
 	 */
-	public List<BoardListDTO> list() {
+	public List<BoardListDTO> list(BoardSearchDTO boardSearchDTO) {
 		List<BoardListDTO> lists = null;
+		logger.info("search: {}", boardSearchDTO.toString());
 
-		lists = boardMapper.list();
+		//long listSize = boardMapper.listSize(); //전체 사이즈
+		
+		if(boardSearchDTO.getSearchAnimal() == null) {
+			return boardMapper.list();
+		}
+		
+		
+		if(!boardSearchDTO.getSearchAnimal().trim().equals("") &&
+				!boardSearchDTO.getSearchKeyword().trim().equals("")) {
+			logger.info("search all");
+			return boardMapper.listSearchAll(boardSearchDTO);
+		}
+		
+		//동물 검색
+		if(!boardSearchDTO.getSearchAnimal().trim().equals("")) {
+			logger.info("search animal");
+			lists = boardMapper.listSearchAnimal(boardSearchDTO);
+			return lists;
+		}
+		
+		//제목 키워드 검색
+		if(!boardSearchDTO.getSearchKeyword().trim().equals("")) {
+			logger.info("search keyword");
+			lists = boardMapper.listSearchKeyword(boardSearchDTO);
+			return lists;
+		}
+		
+		return boardMapper.list();
 
-		return lists;
 	}
 
 	/**

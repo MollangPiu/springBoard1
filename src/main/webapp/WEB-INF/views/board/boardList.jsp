@@ -146,10 +146,10 @@
 
       <!-- Toolbar -->
       <div class="toolbar">
-        <form class="filters" method="get" action="/board/list">
+        <form class="filters" method="get" action="${pageContext.request.contextPath}/board/list">
           <div class="select">
             <label class="sr-only" for="animal">동물 필터</label>
-            <select id="animal" name="animal">
+            <select id="animal" name="searchAnimal">
               <option value="">전체 동물</option>
               <option value="DOG">강아지</option>
               <option value="CAT">고양이</option>
@@ -170,7 +170,7 @@
 
           <div class="input">
             <label class="sr-only" for="q">검색어</label>
-            <input id="q" name="q" type="text" placeholder="제목/내용/작성자 검색" />
+            <input id="q" name="searchKeyword" type="text" placeholder="제목 검색" />
           </div>
 
           <button class="btn btn-primary" type="submit">검색</button>
