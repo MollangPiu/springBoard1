@@ -6,6 +6,7 @@ public class BoardUpdateDetailDTO {
 	private String boardTitle;
 	private String boardContent;
 	private String boardFavoriteAnimal;
+	private long userIdx;
 	
 	
 	public int getBoardIdx() {
@@ -31,5 +32,11 @@ public class BoardUpdateDetailDTO {
 	}
 	public void setBoardFavoriteAnimal(String boardFavoriteAnimal) {
 		this.boardFavoriteAnimal = boardFavoriteAnimal;
+	}
+	public long getUserIdx() {
+		return userIdx;
+	}
+	public void setUserIdx(long userIdx) {
+		this.userIdx = userIdx;
 	}
 }

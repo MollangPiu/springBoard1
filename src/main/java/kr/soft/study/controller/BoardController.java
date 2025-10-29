@@ -86,7 +86,12 @@ public class BoardController {
 	public String update(HttpServletRequest request, Model model) {
 		
 		BoardUpdateDetailDTO detail = boardService.updateDetail(request);
-		if(detail == null) {
+		String boardIdx = request.getParameter("idx");
+		
+		if(detail == null && boardIdx != null) {
+			return "redirect:/board/detail?idx="+boardIdx;
+		}
+		if(detail == null && boardIdx == null) {
 			return "redirect:/board/list";
 		}
 		

@@ -119,10 +119,19 @@ public class BoardService {
 		}
 
 		int idx = Integer.parseInt(strIdx);
-
-		boardMapper.viewCount(idx);
-
 		BoardUpdateDetailDTO detail = boardMapper.updateDetail(idx);
+		
+		//비교하기 유효성 검사
+		HttpSession session = request.getSession();
+		MemberInfoDTO userInfo = (MemberInfoDTO)session.getAttribute("userInfo");
+		
+		if(userInfo == null) {
+			return null;
+		}
+		
+		if(detail.getUserIdx() != userInfo.getUserIdx()) {
+			return null;
+		}
 
 		return detail;
 	}

@@ -1,3 +1,4 @@
+<%@page import="kr.soft.study.dto.member.MemberInfoDTO"%>
 <%@page import="kr.soft.study.dto.board.BoardDetailDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -65,6 +66,7 @@
 <body>
 <%
 	BoardDetailDTO detail = (BoardDetailDTO)request.getAttribute("detail");
+	
 %>
   <main class="page">
     <section class="card" role="region" aria-labelledby="title">
@@ -120,6 +122,7 @@
           <a class="btn btn-primary" href="${pageContext.request.contextPath}/board/update?idx=${detail.getBoardIdx()}">수정</a>
           <a class="btn btn-danger"  href="${pageContext.request.contextPath}/board/delete?idx=${detail.getBoardIdx()}">삭제</a>
         </div>
+
       </div>
     </section>
   </main>
