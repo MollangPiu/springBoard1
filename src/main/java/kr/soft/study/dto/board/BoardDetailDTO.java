@@ -10,6 +10,7 @@ public class BoardDetailDTO {
 	private int boardViewCount;
 	private String boardNickName;
 	private String animalKor;
+	private long userIdx;
 	
 	
 	public long getBoardIdx() {
@@ -59,5 +60,11 @@ public class BoardDetailDTO {
 	}
 	public void setAnimalKor(String animalKor) {
 		this.animalKor = animalKor;
+	}
+	public long getUserIdx() {
+		return userIdx;
+	}
+	public void setUserIdx(long userIdx) {
+		this.userIdx = userIdx;
 	}
 }
