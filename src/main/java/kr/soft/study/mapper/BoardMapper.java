@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardUpdateDetailDTO;
+import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 
 @Mapper
 public interface BoardMapper {
@@ -43,4 +45,17 @@ public interface BoardMapper {
 	 * @return
 	 */
 	BoardDetailDTO detail(int idx);
+	
+	/**
+	 * 수정하기, 상세보기 화면
+	 * @param idx
+	 * @return
+	 */
+	BoardUpdateDetailDTO updateDetail(int idx);
+	
+	/**
+	 * 수정하기, 완료버튼
+	 * @param boardUpdateProcessDTO
+	 */
+	void updateProcess(BoardUpdateProcessDTO boardUpdateProcessDTO);
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardUpdateDetailDTO;
+import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
 import kr.soft.study.service.BoardService;
 
@@ -78,6 +80,33 @@ public class BoardController {
 		model.addAttribute("detail", detail);
 		
 		return "board/boardDetail";
+	}
+	
+	@GetMapping("/update")
+	public String update(HttpServletRequest request, Model model) {
+		
+		BoardUpdateDetailDTO detail = boardService.updateDetail(request);
+		if(detail == null) {
+			return "redirect:/board/list";
+		}
+		
+		model.addAttribute("detail", detail);
+		
+		return "board/boardUpdate";
+	}
+	
+	@PostMapping("/updateProcess")
+	public String updateProcess(BoardUpdateProcessDTO boardUpdateProcessDTO,
+			HttpServletRequest request) {
+		
+		String result = boardService.updateProcess(boardUpdateProcessDTO, request);
+		logger.info("result: {}", result);
+		if(result.startsWith("sucess:")) {
+			int index = result.indexOf(":")+1;
+			return "redirect:/board/detail?idx="+result.substring(index);
+		}
+		
+		return "redirect:/board/list";
 	}
 
 }
