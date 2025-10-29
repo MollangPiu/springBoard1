@@ -84,7 +84,7 @@ public class BoardController {
 	@GetMapping("/update")
 	public String update(HttpServletRequest request, Model model) {
 		
-		BoardUpdateDetailDTO detail = boardService.boardUpdateDetail(request);
+		BoardUpdateDetailDTO detail = boardService.updateDetail(request);
 		if(detail == null) {
 			return "redirect:/board/list";
 		}

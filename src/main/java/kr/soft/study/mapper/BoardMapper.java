@@ -46,5 +46,5 @@ public interface BoardMapper {
 	BoardDetailDTO detail(int idx);
 	
 	
-	BoardUpdateDetailDTO boardUpdateDetail(int idx);
+	BoardUpdateDetailDTO updateDetail(int idx);
 }

@@ -117,7 +117,7 @@
           <a class="btn btn-ghost" href="${pageContext.request.contextPath}/board/list">← 목록</a>
         </div>
         <div>
-          <a class="btn btn-primary" href="/board/edit?idx=12">수정</a>
+          <a class="btn btn-primary" href="${pageContext.request.contextPath}/board/update?idx=${detail.getBoardIdx()}">수정</a>
           <a class="btn btn-danger"  href="/board/delete?idx=12">삭제</a>
         </div>
       </div>

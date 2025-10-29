@@ -102,7 +102,7 @@ public class BoardService {
 		return detail;
 	}
 
-	public BoardUpdateDetailDTO boardUpdateDetail(HttpServletRequest request) {
+	public BoardUpdateDetailDTO updateDetail(HttpServletRequest request) {
 
 		String strIdx = request.getParameter("idx"); // idx 가져오기
 		if (strIdx == null) {
@@ -113,7 +113,7 @@ public class BoardService {
 
 		boardMapper.viewCount(idx);
 
-		BoardUpdateDetailDTO detail = boardMapper.boardUpdateDetail(idx);
+		BoardUpdateDetailDTO detail = boardMapper.updateDetail(idx);
 
 		return detail;
 	}

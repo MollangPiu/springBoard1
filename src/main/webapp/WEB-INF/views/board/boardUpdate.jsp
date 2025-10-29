@@ -1,3 +1,4 @@
+<%@page import="kr.soft.study.dto.board.BoardUpdateDetailDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,6 +68,11 @@
   </style>
 </head>
 <body>
+
+<%
+	BoardUpdateDetailDTO detail = (BoardUpdateDetailDTO)request.getAttribute("detail");
+
+%>
   <main class="page">
     <section class="card" role="region" aria-labelledby="title">
       <header class="head">
@@ -77,20 +83,20 @@
             <p class="sub">제목, 내용, 좋아하는 동물을 수정한 뒤 저장하세요.</p>
           </div>
         </div>
-        <a class="btn btn-ghost" href="/board/list">목록으로</a>
+        <a class="btn btn-ghost" href="${pageContext.request.contextPath}/board/list">목록으로</a>
       </header>
 
       <!-- 수정 폼 -->
-      <form class="form" method="post" action="/board/update" accept-charset="UTF-8">
+      <form class="form" method="post" action="${pageContext.request.contextPath}/board/updateProcess" accept-charset="UTF-8">
         <!-- 글 번호는 서버에서 채워주세요 -->
-        <input type="hidden" name="boardIdx" value="12" />
+        <input type="hidden" name="boardIdx" value="${detail.boardIdx}" />
 
         <div class="row">
           <div class="field" style="flex:1 1 420px">
             <label class="label" for="title">제목</label>
             <div class="input">
               <!-- value는 서버에서 기존 제목으로 채워 넣기 -->
-              <input id="title" name="title" type="text" required maxlength="200" placeholder="제목을 입력하세요" value="우리 집 고양이 첫날 기록" />
+              <input id="title" name="title" type="text" required maxlength="200" placeholder="제목을 입력하세요" value="${detail.boardTitle}" />
             </div>
           </div>
 
@@ -99,12 +105,12 @@
             <div class="select">
               <!-- 서버에서 기존 코드에 맞춰 selected 설정 -->
               <select id="favorite_animal" name="favorite_animal" required>
-                <option value="DOG">강아지</option>
-                <option value="CAT" selected>고양이</option>
-                <option value="BIRD">새</option>
-                <option value="RABBIT">토끼</option>
-                <option value="ETC">기타</option>
-              </select>
+				  <option value="DOG"    ${detail.boardFavoriteAnimal == 'DOG'    ? 'selected' : ''}>강아지</option>
+				  <option value="CAT"    ${detail.boardFavoriteAnimal == 'CAT'    ? 'selected' : ''}>고양이</option>
+				  <option value="BIRD"   ${detail.boardFavoriteAnimal == 'BIRD'   ? 'selected' : ''}>새</option>
+				  <option value="RABBIT" ${detail.boardFavoriteAnimal == 'RABBIT' ? 'selected' : ''}>토끼</option>
+				  <option value="ETC"    ${detail.boardFavoriteAnimal == 'ETC'    ? 'selected' : ''}>기타</option>
+			  </select>
             </div>
           </div>
         </div>
@@ -112,7 +118,7 @@
         <div class="field">
           <label class="label" for="content">내용</label>
           <!-- 본문은 텍스트로만, 서버에서 기존 내용 채워 넣기 -->
-          <textarea id="content" name="content" class="textarea" required>처음 집에 온 날이라 그런지 낯설어하면서도 금방 적응하더라고요. 사료는 조금만 먹고 물은 잘 마셨어요. 화장실도 금방 익숙해졌습니다.</textarea>
+          <textarea id="content" name="content" class="textarea" required>${detail.boardContent}</textarea>
         </div>
 
         <div class="actions">
