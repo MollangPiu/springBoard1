@@ -10,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.soft.study.dto.board.BoardDTO;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
 import kr.soft.study.dto.board.BoardUpdateDetailDTO;
+import kr.soft.study.dto.board.BoardUpdateProcessDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
 import kr.soft.study.dto.member.MemberRegisterDTO;
 import kr.soft.study.mapper.BoardMapper;
@@ -48,7 +50,7 @@ public class BoardService {
 		boardRegisterDTO.setUserIdx(userIdx); // userIdx 삽입하기
 
 		// 빈값 확인하기
-		String result = checkRegister(boardRegisterDTO);
+		String result = checkNull(boardRegisterDTO);
 		if (!result.equals("sucess")) {
 			return result;
 		}
@@ -102,6 +104,12 @@ public class BoardService {
 		return detail;
 	}
 
+	/**
+	 * 수정하기, 상세보기
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public BoardUpdateDetailDTO updateDetail(HttpServletRequest request) {
 
 		String strIdx = request.getParameter("idx"); // idx 가져오기
@@ -118,20 +126,50 @@ public class BoardService {
 		return detail;
 	}
 
+	public String updateProcess(BoardUpdateProcessDTO boardUpdateProcessDTO, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberInfoDTO info = (MemberInfoDTO) session.getAttribute("userInfo");
+
+		//작성자 유효성 검사
+		if (info == null) {
+			return "null";
+		}
+
+		//작성자 넣기
+		long userIdx = info.getUserIdx();
+		boardUpdateProcessDTO.setUserIdx(userIdx);
+
+		// 빈값 확인하기
+		String result = checkNull(boardUpdateProcessDTO);
+		if (!result.equals("sucess")) {
+			return result;
+		}
+
+		// 자리수 확인하기
+		result = checkValidity(boardUpdateProcessDTO);
+		if (!result.equals("sucess")) {
+			return result;
+		}
+
+		boardMapper.updateProcess(boardUpdateProcessDTO);
+		
+		return "sucess:" + String.valueOf(boardUpdateProcessDTO.getBoardIdx());
+	}
+
 	/**
 	 * 유효성 검사, 자리수
 	 * 
 	 * @param boardRegisterDTO
 	 * @return
 	 */
-	private String checkValidity(BoardRegisterDTO boardRegisterDTO) {
+	private String checkValidity(BoardDTO boardDTO) {
 
 		// 1자리 이상, 200자리 이하
-		if (boardRegisterDTO.getBoardTitle().length() < 1 || boardRegisterDTO.getBoardTitle().length() > 200) {
+		if (boardDTO.getBoardTitle().length() < 1 || boardDTO.getBoardTitle().length() > 200) {
 			return "validity_title";
 		}
 		// 6자리 이상
-		if (boardRegisterDTO.getBoardContent().length() < 6) {
+		if (boardDTO.getBoardContent().length() < 6) {
 			return "validity_content";
 		}
 
@@ -141,18 +179,17 @@ public class BoardService {
 	/**
 	 * NULL 혹은 빈값 체크하기
 	 * 
-	 * @param boardRegisterDTO
+	 * @param BoardDTO
 	 * @return
 	 */
-	private String checkRegister(BoardRegisterDTO boardRegisterDTO) {
-		if (boardRegisterDTO.getBoardTitle() == null || boardRegisterDTO.getBoardTitle().trim().equals("")) {
+	private String checkNull(BoardDTO boardDTO) {
+		if (boardDTO.getBoardTitle() == null || boardDTO.getBoardTitle().trim().equals("")) {
 			return "blank_title";
 		}
-		if (boardRegisterDTO.getBoardContent() == null || boardRegisterDTO.getBoardContent().trim().equals("")) {
+		if (boardDTO.getBoardContent() == null || boardDTO.getBoardContent().trim().equals("")) {
 			return "blank_content";
 		}
-		if (boardRegisterDTO.getBoardFavoriteAnimal() == null
-				|| boardRegisterDTO.getBoardFavoriteAnimal().trim().equals("")) {
+		if (boardDTO.getBoardFavoriteAnimal() == null || boardDTO.getBoardFavoriteAnimal().trim().equals("")) {
 			return "blank_favoriteAnimal";
 		}
 

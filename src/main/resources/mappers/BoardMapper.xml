@@ -72,4 +72,15 @@
 		FROM STUDY_BOARD
 		WHERE BOARD_IDX = #{idx}
 	</select>
+	
+	<update id="updateProcess" parameterType="BoardUpdateProcessDTO">
+		UPDATE STUDY_BOARD
+		SET
+			BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent},
+			BOARD_FAVORITE_ANIMAL = #{boardFavoriteAnimal}
+		WHERE
+			BOARD_IDX = #{boardIdx}
+			AND USER_IDX = #{userIdx}
+	</update>
 </mapper>

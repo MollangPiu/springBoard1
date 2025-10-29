@@ -96,7 +96,7 @@
             <label class="label" for="title">제목</label>
             <div class="input">
               <!-- value는 서버에서 기존 제목으로 채워 넣기 -->
-              <input id="title" name="title" type="text" required maxlength="200" placeholder="제목을 입력하세요" value="${detail.boardTitle}" />
+              <input id="title" name="boardTitle" type="text" required maxlength="200" placeholder="제목을 입력하세요" value="${detail.boardTitle}" />
             </div>
           </div>
 
@@ -104,7 +104,7 @@
             <label class="label" for="favorite_animal">좋아하는 동물</label>
             <div class="select">
               <!-- 서버에서 기존 코드에 맞춰 selected 설정 -->
-              <select id="favorite_animal" name="favorite_animal" required>
+              <select id="favorite_animal" name="boardFavoriteAnimal" required>
 				  <option value="DOG"    ${detail.boardFavoriteAnimal == 'DOG'    ? 'selected' : ''}>강아지</option>
 				  <option value="CAT"    ${detail.boardFavoriteAnimal == 'CAT'    ? 'selected' : ''}>고양이</option>
 				  <option value="BIRD"   ${detail.boardFavoriteAnimal == 'BIRD'   ? 'selected' : ''}>새</option>
@@ -118,11 +118,11 @@
         <div class="field">
           <label class="label" for="content">내용</label>
           <!-- 본문은 텍스트로만, 서버에서 기존 내용 채워 넣기 -->
-          <textarea id="content" name="content" class="textarea" required>${detail.boardContent}</textarea>
+          <textarea id="content" name="boardContent" class="textarea" required>${detail.boardContent}</textarea>
         </div>
 
         <div class="actions">
-          <a class="btn btn-ghost" href="/board/view?idx=12">취소</a>
+          <a class="btn btn-ghost" href="${pageContext.request.contextPath}/board/detail?idx=${detail.boardIdx}">취소</a>
           <div>
             <a class="btn btn-danger" href="/board/delete?idx=12">삭제</a>
             <button class="btn btn-primary" type="submit">저장</button>
