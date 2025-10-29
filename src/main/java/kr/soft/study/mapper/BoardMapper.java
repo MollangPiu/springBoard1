@@ -29,11 +29,25 @@ public interface BoardMapper {
 	int boardLastIdx(long idx);
 	
 	
+	
+	int listSize(BoardSearchDTO boardSearchDTO);
+	
+	
+	int listSearchAnimalSize(BoardSearchDTO boardSearchDTO);
+	
+	
+	int listSearchKeywordSize(BoardSearchDTO boardSearchDTO);
+	
+	
+	int listSearchAllSize(BoardSearchDTO boardSearchDTO);
+	
+	
 	/**
 	 * 게시판 리스트
+	 * @param boardSearchDTO
 	 * @return
 	 */
-	List<BoardListDTO> list();
+	List<BoardListDTO> list(BoardSearchDTO boardSearchDTO);
 	
 	/**
 	 * 게시판 검색, 키워드, 동물 검색

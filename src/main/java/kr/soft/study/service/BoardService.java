@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import kr.soft.study.dto.board.BoardDTO;
 import kr.soft.study.dto.board.BoardDeleteProcessDTO;
@@ -76,39 +78,60 @@ public class BoardService {
 	 * 
 	 * @return
 	 */
-	public List<BoardListDTO> list(BoardSearchDTO boardSearchDTO) {
+	public int list(BoardSearchDTO boardSearchDTO,
+			HttpServletRequest request,
+			Model model) {
+		
+		
 		List<BoardListDTO> lists = null;
 		logger.info("search: {}", boardSearchDTO.toString());
-
-		//long listSize = boardMapper.listSize(); //전체 사이즈
 		
+		//Page번호 지정
+		String pageNum = request.getParameter("pageNum");
+		int num = 0;
+		if(pageNum != null ) {
+			num = Integer.parseInt(pageNum)*10;
+		}
+		boardSearchDTO.setPageNum(num);
+		model.addAttribute("pageNum", num);
+
 		if(boardSearchDTO.getSearchAnimal() == null) {
-			return boardMapper.list();
+			lists = boardMapper.list(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSize(boardSearchDTO);
 		}
 		
 		
 		if(!boardSearchDTO.getSearchAnimal().trim().equals("") &&
 				!boardSearchDTO.getSearchKeyword().trim().equals("")) {
 			logger.info("search all");
-			return boardMapper.listSearchAll(boardSearchDTO);
+			lists = boardMapper.listSearchAll(boardSearchDTO);
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchAllSize(boardSearchDTO);
 		}
 		
 		//동물 검색
 		if(!boardSearchDTO.getSearchAnimal().trim().equals("")) {
 			logger.info("search animal");
 			lists = boardMapper.listSearchAnimal(boardSearchDTO);
-			return lists;
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchAnimalSize(boardSearchDTO);
 		}
 		
 		//제목 키워드 검색
 		if(!boardSearchDTO.getSearchKeyword().trim().equals("")) {
 			logger.info("search keyword");
 			lists = boardMapper.listSearchKeyword(boardSearchDTO);
-			return lists;
+			model.addAttribute("lists", lists);
+			return boardMapper.listSearchKeywordSize(boardSearchDTO);
 		}
 		
-		return boardMapper.list();
-
+		lists= boardMapper.list(boardSearchDTO);
+		model.addAttribute("lists", lists);
+		
+		
+		return boardMapper.listSize(boardSearchDTO);
+		
 	}
 
 	/**

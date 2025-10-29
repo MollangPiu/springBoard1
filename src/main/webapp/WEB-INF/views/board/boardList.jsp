@@ -130,6 +130,7 @@
 
 <%
 	List<BoardListDTO> lists = (List<BoardListDTO>)request.getAttribute("lists");
+	int listSize = (Integer) request.getAttribute("listSize");
 %>
   <main class="page">
     <section class="card" role="region" aria-labelledby="title">
@@ -197,6 +198,14 @@
           </thead>
           <tbody>
           <%
+          	if(listSize == 0) {
+          		%><tr>
+          			<td rowspan="6">게시글 없음</td>
+          		  </tr>
+          		<%
+          	}
+          %>
+          <%
           	for(int i=0; i < lists.size(); i++) {
           		%>
           			<tr onClick="detail(<%=lists.get(i).getBoardIdx()%>)">
@@ -247,13 +256,19 @@
 
       <!-- Pagination -->
       <nav class="pagination" aria-label="페이지네이션">
-        <a class="page-btn" href="/board/list?page=1" aria-label="처음">&laquo;</a>
-        <a class="page-btn" href="/board/list?page=1" aria-label="이전">&lsaquo;</a>
-        <a class="page-btn active" href="/board/list?page=1">1</a>
-        <a class="page-btn" href="/board/list?page=2">2</a>
-        <a class="page-btn" href="/board/list?page=3">3</a>
-        <a class="page-btn" href="/board/list?page=2" aria-label="다음">&rsaquo;</a>
-        <a class="page-btn" href="/board/list?page=10" aria-label="끝">&raquo;</a>
+      	<%
+      		int pageNum = (Integer) request.getAttribute("pageNum");
+      		for(int i=0; i < (listSize/10)+1 ; i++) {
+      			%>
+      				<%
+      					if(i == pageNum) {%>
+      						<a class="page-btn active" href="${pageContext.request.contextPath}/board/list?pageNum=<%=i%>"><%=(i+1) %></a>	
+      					<%}
+      					else {%>
+      						<a class="page-btn" href="${pageContext.request.contextPath}/board/list?pageNum=<%=i%>"><%=(i+1) %></a>		
+      					<%}
+      		}
+      	%>
       </nav>
     </section>
   </main>

@@ -4,6 +4,22 @@ public class BoardSearchDTO {
 
 	private String searchAnimal;
 	private String searchKeyword;
+	private int pageNum;	//현재 게시판 번호
+	private int contentViewSize; //현재화면, 게시글 수
+	
+	public BoardSearchDTO() {
+		this.contentViewSize = 10;
+	}
+	
+	
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
 
 	public String getSearchAnimal() {
 		return searchAnimal;
@@ -21,9 +37,23 @@ public class BoardSearchDTO {
 		this.searchKeyword = searchKeyword;
 	}
 
+	public int getContentViewSize() {
+		return contentViewSize;
+	}
+
+
+
+	public void setContentViewSize(int contentViewSize) {
+		this.contentViewSize = contentViewSize;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "BoardSearchDTO [searchAnimal=" + searchAnimal + ", searchKeyword=" + searchKeyword + "]";
+		return "BoardSearchDTO [searchAnimal=" + searchAnimal + ", searchKeyword=" + searchKeyword + ", pageNum="
+				+ pageNum + ", contentViewSize=" + contentViewSize + "]";
 	}
+
 	
 }

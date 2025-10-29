@@ -60,12 +60,11 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model, BoardSearchDTO boardSearchDTO) {
+	public String list(Model model, BoardSearchDTO boardSearchDTO,
+			HttpServletRequest request) {
 		
-		List<BoardListDTO> lists = boardService.list(boardSearchDTO);
-		logger.info("List Å©±â: {}", lists.size());
-		
-		model.addAttribute("lists", lists);
+		int listSize = boardService.list(boardSearchDTO, request, model);
+		model.addAttribute("listSize", listSize);
 		
 		return "board/boardList";
 	}
