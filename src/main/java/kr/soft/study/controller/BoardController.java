@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.soft.study.dto.board.BoardDetailDTO;
 import kr.soft.study.dto.board.BoardListDTO;
 import kr.soft.study.dto.board.BoardRegisterDTO;
+import kr.soft.study.dto.board.BoardUpdateDetailDTO;
 import kr.soft.study.dto.member.MemberInfoDTO;
 import kr.soft.study.service.BoardService;
 
@@ -81,7 +82,15 @@ public class BoardController {
 	}
 	
 	@GetMapping("/update")
-	public String update() {
+	public String update(HttpServletRequest request, Model model) {
+		
+		BoardUpdateDetailDTO detail = boardService.boardUpdateDetail(request);
+		if(detail == null) {
+			return "redirect:/board/list";
+		}
+		
+		model.addAttribute("detail", detail);
+		
 		return "board/boardUpdate";
 	}
 
