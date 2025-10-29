@@ -1,6 +1,7 @@
 package kr.soft.study.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,19 @@ public class MemberController {
 		if(result) {
 			return "redirect:/board/list";
 		}
+		return "redirect:/member/login";
+	}
+	
+	/**
+	 * ·Î±×¾Æ¿ô
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
 		return "redirect:/member/login";
 	}
 }

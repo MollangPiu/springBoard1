@@ -1,3 +1,4 @@
+<%@page import="kr.soft.study.dto.member.MemberInfoDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -131,6 +132,13 @@
 <%
 	List<BoardListDTO> lists = (List<BoardListDTO>)request.getAttribute("lists");
 	int listSize = (Integer) request.getAttribute("listSize");
+	
+	//세션 확인
+	boolean loginCheck = false;
+	MemberInfoDTO userInfo = (MemberInfoDTO) session.getAttribute("userInfo");
+	if(userInfo != null) {
+		loginCheck = true;
+	}
 %>
   <main class="page">
     <section class="card" role="region" aria-labelledby="title">
@@ -142,7 +150,15 @@
             <p class="sub">목록에서 글을 선택하거나, 새 글을 작성하세요.</p>
           </div>
         </div>
-        <a class="btn btn-ghost" href="${pageContext.request.contextPath}/member/login">로그인</a>
+        <%
+        	if(loginCheck) {
+        		%>
+        		<a class="btn btn-ghost" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+        		<%
+        	} else {%>
+        		<a class="btn btn-ghost" href="${pageContext.request.contextPath}/member/login">로그인</a>
+        	<%}
+        %>
       </header>
 
       <!-- Toolbar -->
